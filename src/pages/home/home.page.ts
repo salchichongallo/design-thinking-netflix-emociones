@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { Component, inject } from "@angular/core";
 import { EmotionOptionComponent } from "../../components/emotion-option/emotion-option.component";
 
 @Component({
@@ -8,7 +9,9 @@ import { EmotionOptionComponent } from "../../components/emotion-option/emotion-
   imports: [EmotionOptionComponent],
 })
 export class HomePage {
+  private router = inject(Router);
+
   watch(movieName: string) {
-    alert(movieName);
+    return this.router.navigate(["/video", movieName]);
   }
 }
