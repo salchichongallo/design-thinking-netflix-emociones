@@ -1,0 +1,18 @@
+<div class="modal">
+  <div class="overlay">
+    <section class="content">
+      <ng-content *ngIf="!hasResponse(); else thankYou">
+        <!-- TODO: render emotion -->
+        <h2>¿Sentiste miedo?</h2>
+        <div class="options">
+          <emotion-option (onClick)="onYes()" icon="👍🏻" text="Sí" />
+          <emotion-option (onClick)="onNo()" icon="👎🏻" text="No" />
+        </div>
+      </ng-content>
+      <ng-template #thankYou>
+        <h2>¡Gracias!</h2>
+        <small>Será dirigo al home en 3 segundos...</small>
+      </ng-template>
+    </section>
+  </div>
+</div>
