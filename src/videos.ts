@@ -20,7 +20,7 @@ export const videos: AppVideo[] = [
     name: "monja-enojo-frustracion-miedo.mp4",
     icon: "😨",
     text: "Con miedo",
-    question: "¿Te sentiste con miedo? 😨",
+    question: "¿Sentiste miedo? 😨",
     getUrl() {
       return `/videos/${this.name}`;
     },
