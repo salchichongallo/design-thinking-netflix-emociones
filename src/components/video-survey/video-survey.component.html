@@ -1,13 +1,14 @@
 <app-modal>
-  <h2>{{ video().question }}</h2>
   <ng-container *ngIf="!response(); else thankYou">
+    <h2>{{ video().question }}</h2>
     <div class="options">
       <emotion-option (onClick)="onYes()" icon="👍🏻" text="Sí" />
       <emotion-option (onClick)="onNo()" icon="👎🏻" text="No" />
     </div>
   </ng-container>
   <ng-template #thankYou>
-    <h2>Respondiste: {{ response() }}</h2>
+    <h2 style="font-size: 4rem">👋🏻</h2>
+    <h2>¡Gracias!</h2>
     <a routerLink="/" class="link">Ver más videos</a>
   </ng-template>
 </app-modal>
