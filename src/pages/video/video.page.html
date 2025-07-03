@@ -1,2 +1,9 @@
-<h1>Video page</h1>
-<p>{{ videoName() }}</p>
+<app-header />
+
+<video
+  [src]="videoUrl()"
+  controls
+  autoplay="autoplay"
+  playsinline="autoplay"
+  (ended)="onFinish()"
+></video>
