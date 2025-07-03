@@ -1,11 +1,6 @@
 <app-header />
 
-<video
-  #videoPlayer
-  [src]="videoUrl()"
-  controls
-  autoplay="autoplay"
-  playsinline="autoplay"
-></video>
+<instructions-modal *ngIf="!ready()" (onOk)="onReady()" />
 
+<video #videoPlayer [src]="videoUrl()" controls playsinline="autoplay"></video>
 <video-survey *ngIf="finished()" [video]="video()" />

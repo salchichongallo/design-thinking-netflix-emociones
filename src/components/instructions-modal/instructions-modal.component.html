@@ -1,0 +1,9 @@
+<app-modal [transparent]="true">
+  <h2>Instrucciones</h2>
+  <div class="instructions">
+    <p>Mira el video y califícalo al final.</p>
+    <button (click)="onOk.emit()" type="button" aria-label="Entendido">
+      <img src="/images/play.svg" alt="" />
+    </button>
+  </div>
+</app-modal>

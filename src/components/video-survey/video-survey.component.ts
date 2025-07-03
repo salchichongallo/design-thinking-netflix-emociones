@@ -1,10 +1,10 @@
 import { NgIf } from "@angular/common";
-import { Router, RouterLink } from "@angular/router";
-import { Component, inject, input, signal } from "@angular/core";
+import { RouterLink } from "@angular/router";
+import { Component, input, signal } from "@angular/core";
 
 import { AppVideo } from "../../videos";
-import { EmotionOptionComponent } from "../emotion-option/emotion-option.component";
 import { AppModalComponent } from "../app-modal/app-modal.component";
+import { EmotionOptionComponent } from "../emotion-option/emotion-option.component";
 
 @Component({
   selector: "video-survey",
@@ -13,8 +13,6 @@ import { AppModalComponent } from "../app-modal/app-modal.component";
   imports: [EmotionOptionComponent, NgIf, RouterLink, AppModalComponent],
 })
 export class VideoSurveyComponent {
-  private router = inject(Router);
-
   video = input.required<AppVideo>();
 
   response = signal("");
