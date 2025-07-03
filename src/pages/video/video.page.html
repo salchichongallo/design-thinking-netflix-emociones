@@ -1,11 +1,11 @@
 <app-header />
 
 <video
+  #videoPlayer
   [src]="videoUrl()"
   controls
   autoplay="autoplay"
   playsinline="autoplay"
-  (ended)="onFinish()"
 ></video>
 
 <video-survey *ngIf="finished()" [video]="video()" />

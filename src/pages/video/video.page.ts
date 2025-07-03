@@ -5,11 +5,15 @@ import {
   computed,
   Component,
   AfterViewInit,
+  ViewChild,
+  ElementRef,
 } from "@angular/core";
 
 import { getByName } from "../../videos";
 import { AppHeaderComponent } from "../../components/app-header/app-header.component";
 import { VideoSurveyComponent } from "../../components/video-survey/video-survey.component";
+
+import { FullScreenService } from "./full-screen.service";
 
 @Component({
   selector: "video-page",
@@ -26,12 +30,27 @@ export class VideoPage implements AfterViewInit {
 
   finished = signal(false);
 
-  ngAfterViewInit() {
-    document.querySelector("video")?.requestFullscreen();
+  @ViewChild("videoPlayer") videoPlayerRef!: ElementRef<HTMLVideoElement>;
+
+  async ngAfterViewInit() {
+    const videoElement = this.videoPlayerRef.nativeElement;
+    await FullScreenService.enter(videoElement);
+    const checkVideoEnded = () => {
+      if (videoElement.duration && videoElement.currentTime) {
+        const remaining = videoElement.duration - videoElement.currentTime;
+        if (remaining <= 0.1) {
+          this.onFinish();
+          return;
+        }
+      }
+      requestAnimationFrame(checkVideoEnded);
+    };
+
+    requestAnimationFrame(checkVideoEnded);
   }
 
-  onFinish() {
-    document.exitFullscreen();
+  async onFinish() {
+    await FullScreenService.exit();
     this.finished.set(true);
   }
 }
