@@ -6,6 +6,8 @@ import {
   Component,
   AfterViewInit,
 } from "@angular/core";
+
+import { getByName } from "../../videos";
 import { AppHeaderComponent } from "../../components/app-header/app-header.component";
 import { VideoSurveyComponent } from "../../components/video-survey/video-survey.component";
 
@@ -16,9 +18,11 @@ import { VideoSurveyComponent } from "../../components/video-survey/video-survey
   imports: [NgIf, VideoSurveyComponent, AppHeaderComponent],
 })
 export class VideoPage implements AfterViewInit {
-  videoName = input.required();
+  videoName = input.required<string>();
 
-  videoUrl = computed(() => `/videos/${this.videoName()}`);
+  video = computed(() => getByName(this.videoName()));
+
+  videoUrl = computed(() => this.video().getUrl());
 
   finished = signal(false);
 

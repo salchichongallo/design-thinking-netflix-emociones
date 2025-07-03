@@ -3,30 +3,12 @@
 <main>
   <h1>¿Cómo te sientes?</h1>
   <div class="emotions">
+    @for (video of allVideos; track $index) {
     <emotion-option
-      (onClick)="watch('pijama_rayas-ira-confusion-amenaza.mp4')"
-      icon="🔥"
-      text="Ira"
+      (onClick)="watch(video.name)"
+      [icon]="video.icon"
+      [text]="video.text"
     />
-    <emotion-option
-      (onClick)="watch('monja-enojo-frustracion-miedo.mp4')"
-      icon="😨"
-      text="Miedo"
-    />
-    <emotion-option
-      (onClick)="watch('lara_croft-curiosidad-confusion-comprension.mp4')"
-      icon="🔎"
-      text="Curiosidad"
-    />
-    <emotion-option
-      (onClick)="watch('retorno_guerra-traicion-ira-dolor.mp4')"
-      icon="💔"
-      text="Dolor"
-    />
-    <emotion-option
-      (onClick)="watch('principe_del_rap-resentimiento-orgullo-determinacion.mp4')"
-      icon="💪"
-      text="Determinación"
-    />
+    }
   </div>
 </main>

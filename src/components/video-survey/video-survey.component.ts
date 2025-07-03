@@ -1,6 +1,8 @@
 import { NgIf } from "@angular/common";
 import { Router } from "@angular/router";
-import { Component, effect, inject, signal } from "@angular/core";
+import { Component, effect, inject, input, signal } from "@angular/core";
+
+import { AppVideo } from "../../videos";
 import { EmotionOptionComponent } from "../emotion-option/emotion-option.component";
 
 @Component({
@@ -11,6 +13,8 @@ import { EmotionOptionComponent } from "../emotion-option/emotion-option.compone
 })
 export class VideoSurveyComponent {
   private router = inject(Router);
+
+  video = input.required<AppVideo>();
 
   hasResponse = signal(false);
 
@@ -23,10 +27,12 @@ export class VideoSurveyComponent {
   });
 
   onYes() {
+    console.log(`YES - ${this.video().icon} - ${this.video().text}`);
     this.hasResponse.set(true);
   }
 
   onNo() {
+    console.log(`NO - ${this.video().icon} - ${this.video().text}`);
     this.hasResponse.set(true);
   }
 }
