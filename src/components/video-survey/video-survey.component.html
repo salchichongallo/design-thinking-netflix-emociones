@@ -1,17 +1,13 @@
-<div class="modal">
-  <div class="overlay">
-    <section class="content">
-      <h2>{{ video().question }}</h2>
-      <ng-content *ngIf="!response(); else thankYou">
-        <div class="options">
-          <emotion-option (onClick)="onYes()" icon="👍🏻" text="Sí" />
-          <emotion-option (onClick)="onNo()" icon="👎🏻" text="No" />
-        </div>
-      </ng-content>
-      <ng-template #thankYou>
-        <h2>Respondiste: {{ response() }}</h2>
-        <a routerLink="/" class="link">Ver más videos</a>
-      </ng-template>
-    </section>
-  </div>
-</div>
+<app-modal>
+  <h2>{{ video().question }}</h2>
+  <ng-container *ngIf="!response(); else thankYou">
+    <div class="options">
+      <emotion-option (onClick)="onYes()" icon="👍🏻" text="Sí" />
+      <emotion-option (onClick)="onNo()" icon="👎🏻" text="No" />
+    </div>
+  </ng-container>
+  <ng-template #thankYou>
+    <h2>Respondiste: {{ response() }}</h2>
+    <a routerLink="/" class="link">Ver más videos</a>
+  </ng-template>
+</app-modal>
