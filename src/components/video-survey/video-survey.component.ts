@@ -1,6 +1,6 @@
 import { NgIf } from "@angular/common";
-import { Router } from "@angular/router";
-import { Component, effect, inject, input, signal } from "@angular/core";
+import { Router, RouterLink } from "@angular/router";
+import { Component, inject, input, signal } from "@angular/core";
 
 import { AppVideo } from "../../videos";
 import { EmotionOptionComponent } from "../emotion-option/emotion-option.component";
@@ -9,30 +9,20 @@ import { EmotionOptionComponent } from "../emotion-option/emotion-option.compone
   selector: "video-survey",
   templateUrl: "./video-survey.component.html",
   styleUrl: "./video-survey.component.scss",
-  imports: [EmotionOptionComponent, NgIf],
+  imports: [EmotionOptionComponent, NgIf, RouterLink],
 })
 export class VideoSurveyComponent {
   private router = inject(Router);
 
   video = input.required<AppVideo>();
 
-  hasResponse = signal(false);
-
-  redirectEffect = effect(() => {
-    if (this.hasResponse()) {
-      setTimeout(() => {
-        this.router.navigate(["/"]);
-      }, 3000);
-    }
-  });
+  response = signal("");
 
   onYes() {
-    console.log(`YES - ${this.video().icon} - ${this.video().text}`);
-    this.hasResponse.set(true);
+    this.response.set("Sí");
   }
 
   onNo() {
-    console.log(`NO - ${this.video().icon} - ${this.video().text}`);
-    this.hasResponse.set(true);
+    this.response.set("No");
   }
 }

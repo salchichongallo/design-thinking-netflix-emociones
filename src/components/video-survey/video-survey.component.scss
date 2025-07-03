@@ -30,4 +30,12 @@ h2 {
 .options {
   display: flex;
   gap: 1.5rem;
+  justify-content: center;
+}
+
+.link {
+  display: block;
+  color: inherit;
+  text-align: center;
+  margin-top: 1.5rem;
 }
