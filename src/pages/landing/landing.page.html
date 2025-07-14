@@ -1,1 +1,20 @@
-<h1>Landing page</h1>
+<app-header />
+
+<div class="hero">
+  <div class="emotions">
+    <aside class="emotions__list">
+      <emotion-option icon="🔥" text="Ira" />
+      <emotion-option icon="💖" text="Amor" [active]="true" />
+      <emotion-option icon="🧐" text="Intriga" />
+      <emotion-option icon="😨" text="Miedo" [active]="true" />
+      <emotion-option icon="😁" text="Alegría" />
+      <emotion-option icon="💔" text="Dolor" [active]="true" />
+    </aside>
+  </div>
+
+  <main>
+    <h1>Series y películas según tu estado de ánimo</h1>
+    <p>Descubre películas y series que se adaptan a tu estado de ánimo.</p>
+    <button type="button">Descubre qué ver hoy</button>
+  </main>
+</div>
