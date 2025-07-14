@@ -1,0 +1,21 @@
+<app-modal>
+  <div [formGroup]="form" class="email-modal__content">
+    <h2>Gracias por tu interés</h2>
+    <ng-content *ngIf="!submitted(); else saved">
+      <p>Ingresa tu correo y te avisaremos cuando estemos listos.</p>
+      <input
+        formControlName="email"
+        name="email"
+        id="email"
+        placeholder="john@doe.com"
+      />
+      <button (click)="submit()" type="button" class="button button--wide">
+        Avisarme
+      </button>
+    </ng-content>
+
+    <ng-template #saved>
+      <p style="text-align: center">!Respuesta guardada!</p>
+    </ng-template>
+  </div>
+</app-modal>
