@@ -1,4 +1,4 @@
-<button (click)="onClick.emit()" type="button">
+<button (click)="onClick.emit()" type="button" [class.active]="active()">
   <span class="icon">{{ icon() }}</span>
   <span class="text">{{ text() }}</span>
 </button>

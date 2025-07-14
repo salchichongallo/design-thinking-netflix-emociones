@@ -16,7 +16,8 @@ button {
   min-height: 8.75rem;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &.active {
     background: rgba(#fff, 0.1);
   }
 

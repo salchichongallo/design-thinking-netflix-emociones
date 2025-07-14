@@ -8,6 +8,7 @@ import { Component, input, output } from "@angular/core";
 export class EmotionOptionComponent {
   icon = input.required();
   text = input.required();
+  active = input(false);
 
   onClick = output<void>();
 }
