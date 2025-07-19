@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+main {
+  padding-bottom: 2rem;
+}
+
 .container {
   width: 100%;
   margin: 0 auto;
@@ -81,9 +85,15 @@
 }
 
 .movie-list {
-  display: flex;
+  display: grid;
   gap: 1rem;
   flex-wrap: wrap;
+  box-sizing: border-box;
+  grid-template-columns: 1fr 1fr;
+
+  @media (min-width: 600px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .movie {
@@ -91,7 +101,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  max-width: min-content;
+  width: 100%;
   cursor: pointer;
   border-radius: 0.75rem;
   padding: 0.5rem;
@@ -103,6 +113,8 @@
     pointer-events: none;
     border-radius: 1rem;
     border: 2px solid transparent;
+    width: auto;
+    max-width: 100%;
   }
 
   &__name {
