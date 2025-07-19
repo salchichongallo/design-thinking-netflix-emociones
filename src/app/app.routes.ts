@@ -14,6 +14,14 @@ export const routes: Routes = [
       import("../prototype/pages/home/home.page").then((m) => m.HomePage),
   },
   {
+    path: "para-ti/:emotionId",
+    pathMatch: "full",
+    loadComponent: () =>
+      import("../prototype/pages/for-you/for-you.page").then(
+        (m) => m.ForYouPage
+      ),
+  },
+  {
     // TODO: remove page
     path: "video/:videoName",
     pathMatch: "full",

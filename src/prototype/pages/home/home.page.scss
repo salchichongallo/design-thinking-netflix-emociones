@@ -9,7 +9,7 @@
   padding: 0 1rem;
 
   @media (min-width: 29.25rem) {
-    max-width: 37.5rem;
+    max-width: 41.875rem;
   }
 }
 
@@ -96,7 +96,7 @@
   }
 
   &:focus {
-    border-color: #d81f26;
-    background-color: rgba(#d81f26, 0.1);
+    border-color: var(--primary);
+    background-color: var(--primary-hover);
   }
 }
