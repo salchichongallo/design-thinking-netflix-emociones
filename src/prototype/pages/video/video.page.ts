@@ -8,10 +8,10 @@ import {
   ElementRef,
 } from "@angular/core";
 
-import { getByName } from "../../videos";
-import { AppHeaderComponent } from "../../components/app-header/app-header.component";
-import { VideoSurveyComponent } from "../../components/video-survey/video-survey.component";
-import { InstructionsModalComponent } from "../../components/instructions-modal/instructions-modal.component";
+import { getByName } from "../../../landing/videos";
+import { AppHeaderComponent } from "../../../landing/components/app-header/app-header.component";
+import { VideoSurveyComponent } from "../../../landing/components/video-survey/video-survey.component";
+import { InstructionsModalComponent } from "../../../landing/components/instructions-modal/instructions-modal.component";
 
 import { FullScreenService } from "./full-screen.service";
 
