@@ -2,12 +2,15 @@ import { NgIf, NgStyle } from "@angular/common";
 import { Router, RouterLink } from "@angular/router";
 import { Subscription, fromEvent, map } from "rxjs";
 import {
+  AfterViewInit,
   Component,
   computed,
   ElementRef,
   inject,
   input,
+  OnChanges,
   signal,
+  SimpleChanges,
   ViewChild,
 } from "@angular/core";
 
@@ -21,7 +24,7 @@ import { AppModalComponent } from "../../../landing/components/app-modal/app-mod
   styleUrls: ["./for-you.page.scss", "./buttons.scss"],
   imports: [RouterLink, ScrollUsage, NgStyle, AppModalComponent, NgIf],
 })
-export class ForYouPage {
+export class ForYouPage implements AfterViewInit, OnChanges {
   emotionId = input.required<string>();
 
   progress = signal("0%");
@@ -41,6 +44,14 @@ export class ForYouPage {
   ngAfterViewInit() {
     this.listenSwipeEvents();
     this.listenProgress();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const shouldResetState = !changes["emotionId"].firstChange;
+    if (shouldResetState) {
+      this.ngOnDestroy();
+      this.ngAfterViewInit();
+    }
   }
 
   private listenSwipeEvents() {
@@ -114,12 +125,12 @@ export class ForYouPage {
   }
 
   keepExploring() {
-    this.finished.set(false);
-    this.progress.set("0%");
     return this.nextVideo();
   }
 
   ngOnDestroy() {
+    this.finished.set(false);
+    this.progress.set("0%");
     this.subscription.unsubscribe();
     if (this.animationFrameId !== null) {
       cancelAnimationFrame(this.animationFrameId);
