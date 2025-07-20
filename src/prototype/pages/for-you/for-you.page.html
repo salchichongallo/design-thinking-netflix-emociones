@@ -25,9 +25,11 @@
     <video
       #videoPlayer
       class="video"
-      autoplay
+      [attr.autoplay]="true"
       (click)="togglePlay()"
       src="/videos/pijama_rayas-ira-confusion-amenaza.mp4"
+      [attr.controlsList]="'nofullscreen'"
+      [attr.playsinline]="true"
     ></video>
   </div>
 
