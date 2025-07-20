@@ -75,7 +75,7 @@ $desktop: 932px;
 }
 
 .video-slider {
-  display: inline-flex;
+  display: none;
 
   position: absolute;
   top: 50%;
@@ -86,6 +86,7 @@ $desktop: 932px;
   gap: 1rem;
 
   @media (min-width: $tablet) {
+    display: inline-flex;
     right: 2rem;
   }
 }
