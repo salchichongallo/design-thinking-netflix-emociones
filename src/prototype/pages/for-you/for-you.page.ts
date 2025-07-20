@@ -1,7 +1,17 @@
 import { NgStyle } from "@angular/common";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { Subscription, fromEvent, map } from "rxjs";
-import { Component, ElementRef, input, signal, ViewChild } from "@angular/core";
+import {
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+  signal,
+  ViewChild,
+} from "@angular/core";
+
+import { getById, videos } from "../../../landing/videos";
 import { ScrollUsage } from "../../components/scroll-usage/scroll-usage.component";
 
 @Component({
@@ -14,6 +24,10 @@ export class ForYouPage {
   emotionId = input.required<string>();
 
   progress = signal("0%");
+
+  videoInfo = computed(() => getById(this.emotionId()));
+
+  router = inject(Router);
 
   @ViewChild("videoPlayer") videoRef!: ElementRef<HTMLVideoElement>;
 
@@ -55,11 +69,16 @@ export class ForYouPage {
   }
 
   previousVideo() {
-    // ...
+    const index = videos.indexOf(this.videoInfo());
+    const prevVideo = videos.at(index - 1)!;
+    return this.router.navigate(["/para-ti", prevVideo.id]);
   }
 
   nextVideo() {
-    // ...
+    const index = videos.indexOf(this.videoInfo());
+    const nextIndex = index === videos.length - 1 ? 0 : index + 1;
+    const nextVideo = videos.at(nextIndex)!;
+    return this.router.navigate(["/para-ti", nextVideo.id]);
   }
 
   private listenProgress() {

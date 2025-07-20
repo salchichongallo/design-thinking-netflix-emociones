@@ -27,7 +27,7 @@
       class="video"
       [attr.autoplay]="true"
       (click)="togglePlay()"
-      src="/videos/pijama_rayas-ira-confusion-amenaza.mp4"
+      [src]="videoInfo().getUrl()"
       [attr.controlsList]="'nofullscreen'"
       [attr.playsinline]="true"
     ></video>
@@ -37,10 +37,10 @@
     <div class="video-footer__container">
       <div>
         <div class="video-footer__category">
-          <span class="video-footer__emotion">😨</span>
-          <span>Miedo</span>
+          <span class="video-footer__emotion">{{videoInfo().icon}}</span>
+          <span>{{videoInfo().emotion}}</span>
         </div>
-        <h3 class="video-footer__movie-name">It: Chapter Two (2019)</h3>
+        <h3 class="video-footer__movie-name">{{videoInfo().movieName}}</h3>
       </div>
       <button type="button" class="see-button">
         Ver <img src="/images/play-button.svg" alt="" />
