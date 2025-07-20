@@ -63,18 +63,25 @@ export class ForYouPage {
   }
 
   private listenProgress() {
-    const progress$ = fromEvent(this.video, "timeupdate").pipe(
-      map(() => {
-        const { currentTime, duration } = this.video;
-        return duration ? (currentTime / duration) * 100 : 0;
-      })
-    );
+    const checkVideoEnded = () => {
+      if (this.video.duration && this.video.currentTime) {
+        const progress = (this.video.currentTime / this.video.duration) * 100;
+        this.progress.set(`${progress}%`);
 
-    this.subscription.add(
-      progress$.subscribe((percent) => {
-        this.progress.set(`${percent}%`);
-      })
-    );
+        const remaining = this.video.duration - this.video.currentTime;
+        if (remaining <= 0.1) {
+          this.onFinish();
+          return;
+        }
+      }
+      requestAnimationFrame(checkVideoEnded);
+    };
+
+    requestAnimationFrame(checkVideoEnded);
+  }
+
+  private onFinish() {
+    this.nextVideo();
   }
 
   ngOnDestroy() {
