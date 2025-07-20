@@ -44,7 +44,10 @@
         Ver <img src="/images/play-button.svg" alt="" />
       </button>
     </div>
-    <div class="video-footer__progress"></div>
+    <div
+      [ngStyle]="{'--progress': progress()}"
+      class="video-footer__progress"
+    ></div>
   </div>
 </div>
 

@@ -1,16 +1,19 @@
+import { NgStyle } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { Subscription, fromEvent, map } from "rxjs";
-import { Component, ElementRef, input, ViewChild } from "@angular/core";
+import { Component, ElementRef, input, signal, ViewChild } from "@angular/core";
 import { ScrollUsage } from "../../components/scroll-usage/scroll-usage.component";
 
 @Component({
   selector: "for-you-page",
   templateUrl: "./for-you.page.html",
   styleUrls: ["./for-you.page.scss", "./buttons.scss"],
-  imports: [RouterLink, ScrollUsage],
+  imports: [RouterLink, ScrollUsage, NgStyle],
 })
 export class ForYouPage {
   emotionId = input.required<string>();
+
+  progress = signal("0%");
 
   @ViewChild("videoPlayer") videoRef!: ElementRef<HTMLVideoElement>;
 
@@ -18,6 +21,7 @@ export class ForYouPage {
 
   ngAfterViewInit() {
     this.listenSwipeEvents();
+    this.listenProgress();
   }
 
   private listenSwipeEvents() {
@@ -56,6 +60,21 @@ export class ForYouPage {
 
   nextVideo() {
     // ...
+  }
+
+  private listenProgress() {
+    const progress$ = fromEvent(this.video, "timeupdate").pipe(
+      map(() => {
+        const { currentTime, duration } = this.video;
+        return duration ? (currentTime / duration) * 100 : 0;
+      })
+    );
+
+    this.subscription.add(
+      progress$.subscribe((percent) => {
+        this.progress.set(`${percent}%`);
+      })
+    );
   }
 
   ngOnDestroy() {
