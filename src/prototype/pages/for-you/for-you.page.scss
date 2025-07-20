@@ -28,6 +28,16 @@ $tablet: 600px;
   left: 0;
   width: 100%;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  padding-bottom: 0;
+
+  &__logo {
+    width: 100%;
+    max-width: 7.375rem;
+  }
 
   @media (min-width: $tablet) {
     top: 1rem;
