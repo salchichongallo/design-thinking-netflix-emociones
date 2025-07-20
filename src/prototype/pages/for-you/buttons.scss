@@ -55,3 +55,39 @@
     opacity: 0.8;
   }
 }
+
+.button {
+  all: unset;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  min-height: 3.75rem;
+  text-align: center;
+  border: none;
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 0 1.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &--wide {
+    width: 100%;
+  }
+
+  &--primary {
+    background: #d81f26;
+    color: #fff;
+  }
+
+  &--secondary {
+    background: #fff;
+    color: #d81f26;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

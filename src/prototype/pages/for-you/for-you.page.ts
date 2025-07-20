@@ -1,4 +1,4 @@
-import { NgStyle } from "@angular/common";
+import { NgIf, NgStyle } from "@angular/common";
 import { Router, RouterLink } from "@angular/router";
 import { Subscription, fromEvent, map } from "rxjs";
 import {
@@ -13,12 +13,13 @@ import {
 
 import { getById, videos } from "../../../landing/videos";
 import { ScrollUsage } from "../../components/scroll-usage/scroll-usage.component";
+import { AppModalComponent } from "../../../landing/components/app-modal/app-modal.component";
 
 @Component({
   selector: "for-you-page",
   templateUrl: "./for-you.page.html",
   styleUrls: ["./for-you.page.scss", "./buttons.scss"],
-  imports: [RouterLink, ScrollUsage, NgStyle],
+  imports: [RouterLink, ScrollUsage, NgStyle, AppModalComponent, NgIf],
 })
 export class ForYouPage {
   emotionId = input.required<string>();
@@ -29,9 +30,13 @@ export class ForYouPage {
 
   router = inject(Router);
 
+  finished = signal(false);
+
   @ViewChild("videoPlayer") videoRef!: ElementRef<HTMLVideoElement>;
 
   private subscription = new Subscription();
+
+  private animationFrameId: number | null = null;
 
   ngAfterViewInit() {
     this.listenSwipeEvents();
@@ -93,18 +98,32 @@ export class ForYouPage {
           return;
         }
       }
-      requestAnimationFrame(checkVideoEnded);
+      this.animationFrameId = requestAnimationFrame(checkVideoEnded);
     };
 
-    requestAnimationFrame(checkVideoEnded);
+    this.animationFrameId = requestAnimationFrame(checkVideoEnded);
   }
 
   private onFinish() {
-    this.nextVideo();
+    this.finished.set(true);
+  }
+
+  watchMovie() {
+    const url = this.videoInfo().netflixUrl;
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+
+  keepExploring() {
+    this.finished.set(false);
+    this.progress.set("0%");
+    return this.nextVideo();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    if (this.animationFrameId !== null) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
   }
 
   togglePlay() {

@@ -42,7 +42,7 @@
         </div>
         <h3 class="video-footer__movie-name">{{videoInfo().movieName}}</h3>
       </div>
-      <button type="button" class="see-button">
+      <button (click)="watchMovie()" type="button" class="see-button">
         Ver <img src="/images/play-button.svg" alt="" />
       </button>
     </div>
@@ -63,3 +63,23 @@
 </div>
 
 <scroll-usage />
+
+<app-modal *ngIf="finished()">
+  <h2>¿Te gustó?</h2>
+  <div style="display: flex; flex-direction: column; gap: 1.25rem; width: 100%">
+    <button
+      (click)="watchMovie()"
+      type="button"
+      class="button button--primary button--wide"
+    >
+      Ver completa <img src="/images/play-button.svg" alt="" />
+    </button>
+    <button
+      (click)="keepExploring()"
+      type="button"
+      class="button button--secondary button--wide"
+    >
+      Seguir explorando
+    </button>
+  </div>
+</app-modal>
