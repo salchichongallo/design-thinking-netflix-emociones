@@ -62,6 +62,26 @@ export class ForYouPage {
     this.subscription.unsubscribe();
   }
 
+  togglePlay() {
+    if (this.isPlaying) {
+      this.pause();
+    } else {
+      this.play();
+    }
+  }
+
+  private pause() {
+    this.video.pause();
+  }
+
+  private play() {
+    this.video.play();
+  }
+
+  get isPlaying() {
+    return !this.video.paused && !this.video.ended;
+  }
+
   get video() {
     return this.videoRef.nativeElement;
   }
