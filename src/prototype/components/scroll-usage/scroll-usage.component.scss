@@ -1,0 +1,36 @@
+.scroll-usage {
+  all: unset;
+  display: none;
+
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(#000, 0.5);
+
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  font-size: 1rem;
+  text-align: center;
+
+  &__image {
+    width: auto;
+    max-width: 6rem;
+    animation: swipe-up 1000ms ease-in infinite alternate-reverse;
+  }
+
+  @media (max-width: 37.5rem) {
+    display: flex;
+  }
+}
+
+@keyframes swipe-up {
+  to {
+    transform: translateY(-3rem);
+  }
+}
