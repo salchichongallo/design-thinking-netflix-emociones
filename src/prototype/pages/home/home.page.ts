@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { RouterLink } from "@angular/router";
+import { videos } from "../../../landing/videos";
 
 @Component({
   selector: "home-page",
@@ -7,4 +8,6 @@ import { RouterLink } from "@angular/router";
   styleUrl: "./home.page.scss",
   imports: [RouterLink],
 })
-export class HomePage {}
+export class HomePage {
+  videos = videos;
+}
