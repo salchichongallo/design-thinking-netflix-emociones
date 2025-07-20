@@ -1,4 +1,5 @@
 $tablet: 600px;
+$desktop: 932px;
 
 * {
   box-sizing: border-box;
@@ -33,6 +34,13 @@ $tablet: 600px;
   justify-content: space-between;
   padding: 0.5rem 1rem;
   padding-bottom: 0;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  &__link {
+    all: unset;
+    cursor: pointer;
+  }
 
   &__logo {
     width: 100%;
@@ -41,6 +49,12 @@ $tablet: 600px;
 
   @media (min-width: $tablet) {
     top: 1rem;
+  }
+
+  @media (min-width: $desktop) {
+    &__logo {
+      visibility: hidden;
+    }
   }
 }
 
@@ -133,6 +147,26 @@ $tablet: 600px;
 
     &__container {
       padding-bottom: 1.5rem;
+    }
+  }
+}
+
+.desktop-logo {
+  a {
+    all: unset;
+    cursor: pointer;
+  }
+
+  img {
+    display: none;
+    width: 100%;
+    max-width: 7.375rem;
+
+    @media (min-width: $desktop) {
+      display: block;
+      position: absolute;
+      top: 1.5rem;
+      left: 2rem;
     }
   }
 }
